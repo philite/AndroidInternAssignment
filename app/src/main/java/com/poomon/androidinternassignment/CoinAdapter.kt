@@ -32,7 +32,9 @@ class CoinAdapter() : RecyclerView.Adapter<CoinAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         binding!!.nameText.text = data[position].name
         binding!!.descriptionText.text = data[position].description
-        Log.d("ViewHolderPosition", position.toString())
+
+        // Logging
+        //Log.d("ViewHolderPosition", position.toString())
     }
 
     override fun getItemCount(): Int = data.size
