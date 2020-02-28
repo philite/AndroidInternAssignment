@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidInternAssignment</string>
+
+    <string name="main_text">Coins</string>
 </resources>

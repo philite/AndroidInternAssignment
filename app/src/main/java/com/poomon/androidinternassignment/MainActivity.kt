@@ -2,11 +2,31 @@ package com.poomon.androidinternassignment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
+import com.poomon.androidinternassignment.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val manager = supportFragmentManager
+
+    // Extendable fragment
+    private val pages = listOf(
+        CoinFragment()
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (savedInstanceState == null){
+            fragmentNavigation(0)
+        }
+    }
+
+    // Abstraction fragment navigation
+    private fun fragmentNavigation(page: Int){
+        manager.beginTransaction()
+            .replace(R.id.coinFragment, pages[page])
+            .commit()
     }
 }
