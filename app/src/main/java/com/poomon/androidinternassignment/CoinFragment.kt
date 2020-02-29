@@ -2,6 +2,7 @@ package com.poomon.androidinternassignment
 
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,6 +65,8 @@ class CoinFragment: Fragment() {
         liveData.observe(viewLifecycleOwner, Observer {newData->
             if (newData != null){
                 coinAdapter.updateData(newData)
+                // Logging
+                Log.d("LiveData Fragment", "LiveData updated")
             }
         })
     }
