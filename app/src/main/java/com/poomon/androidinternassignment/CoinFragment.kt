@@ -64,7 +64,7 @@ class CoinFragment: Fragment() {
         // ToDo: DiffUtil
         liveData.observe(viewLifecycleOwner, Observer {newData->
             if (newData != null){
-                coinAdapter.updateData(newData)
+                coinAdapter.submitList(newData)
                 // Logging
                 Log.d("LiveData Fragment", "LiveData updated")
             }

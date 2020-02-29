@@ -2,8 +2,6 @@ package com.poomon.androidinternassignment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
-import com.poomon.androidinternassignment.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

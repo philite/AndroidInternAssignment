@@ -18,6 +18,7 @@ class CoinViewModel: ViewModel() {
     private val list2 = mutableListOf<Coin>()
     private val list3 = mutableListOf<Coin>()
     private val listAll = mutableListOf(list1, list2, list3)
+
     init {
         prepareData()
         fetchCoins()
