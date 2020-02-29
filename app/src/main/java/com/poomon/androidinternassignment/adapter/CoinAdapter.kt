@@ -15,13 +15,6 @@ class CoinAdapter : ListAdapter<Coin, CoinAdapter.ViewHolder>(CoinAdapterDiffCal
 
     class ViewHolder(val binding: ItemCoinBinding): RecyclerView.ViewHolder(binding.root)
 
-//    fun updateData(newData: MutableList<Coin>){
-//        data = newData
-//        notifyDataSetChanged()
-//        Log.d("LiveData Adapter", "Data changed to " + data[0].name + " size = " + data.size.toString())
-//    }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemCoinBinding = ItemCoinBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)

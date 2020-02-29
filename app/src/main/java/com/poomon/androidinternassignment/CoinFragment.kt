@@ -61,7 +61,6 @@ class CoinFragment: Fragment() {
     }
 
     private fun subscribeUi(liveData: LiveData<MutableList<Coin>>){
-        // ToDo: DiffUtil
         liveData.observe(viewLifecycleOwner, Observer {newData->
             if (newData != null){
                 coinAdapter.submitList(newData)

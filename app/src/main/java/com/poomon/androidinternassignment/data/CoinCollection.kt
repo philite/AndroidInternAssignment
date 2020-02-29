@@ -6,7 +6,7 @@ data class CoinCollection(
 )
 
 data class Data(
-    val coins: List<Coin>
+    val coins: MutableList<Coin>
 )
 
 data class Coin(
