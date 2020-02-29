@@ -1,18 +1,20 @@
 package com.poomon.androidinternassignment.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.poomon.androidinternassignment.data.Coin
-import com.poomon.androidinternassignment.data.CoinCollection
 import com.poomon.androidinternassignment.service.CoinApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.random.Random
+import kotlinx.coroutines.*
 
 class CoinViewModel: ViewModel() {
+
+    // Coroutines
+    private var viewModelJob = Job()
+    // Dispatchers.Main = uiScope; Use uiScope because after ended, ui got updated (RecyclerView)
+    private val coroutineScope = CoroutineScope(
+        viewModelJob + Dispatchers.Main
+    )
 
     // LiveData
     private val _response = MutableLiveData<MutableList<Coin>>()
@@ -24,16 +26,20 @@ class CoinViewModel: ViewModel() {
     }
 
     fun fetchCoins(){
-        CoinApi.retrofitService.getWithLimit(30).enqueue(
-            object : Callback<CoinCollection> {
-                override fun onFailure(call: Call<CoinCollection>, t: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        coroutineScope.launch {
+            var api = CoinApi.retrofitService
+            try {
+                _response.value = withContext(Dispatchers.IO){
+                    api.getWithLimit(30).data.coins
                 }
-
-                override fun onResponse(call: Call<CoinCollection>, response: Response<CoinCollection>) {
-                    _response.value = response.body()?.data?.coins
-                }
+            } catch (e: Exception){
+                //TODO
             }
-        )
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }

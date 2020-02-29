@@ -18,10 +18,10 @@ private val retrofit = Retrofit.Builder()
 interface CoinApiService {
 
     @GET("v1/public/coins")
-    fun getWithLimit(
+    suspend fun getWithLimit(
         @IntRange(from = 1, to=100)
         @Query("limit")
-        limit: Int) : Call<CoinCollection>
+        limit: Int) : CoinCollection
 
 }
 
