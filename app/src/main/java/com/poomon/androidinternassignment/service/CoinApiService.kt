@@ -1,8 +1,7 @@
 package com.poomon.androidinternassignment.service
 
 import androidx.annotation.IntRange
-import com.poomon.androidinternassignment.data.CoinCollection
-import retrofit2.Call
+import com.poomon.androidinternassignment.model.CoinCollection
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -18,10 +17,13 @@ private val retrofit = Retrofit.Builder()
 interface CoinApiService {
 
     @GET("v1/public/coins")
-    suspend fun getWithLimit(
-        @IntRange(from = 1, to=100)
-        @Query("limit")
-        limit: Int) : CoinCollection
+    suspend fun getIdWithLimit(
+        @IntRange(from = 1, to=100) @Query("limit") limit: Int) : CoinCollection
+
+    @GET("v1/public/coins")
+    suspend fun getRankWithOffsetLimit(
+        @Query("offset") start: Int,
+        @IntRange(from = 1, to = 100) @Query("limit") limit: Int) : CoinCollection
 
 }
 

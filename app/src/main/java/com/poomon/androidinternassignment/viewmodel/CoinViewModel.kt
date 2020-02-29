@@ -1,45 +1,33 @@
 package com.poomon.androidinternassignment.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.poomon.androidinternassignment.data.Coin
-import com.poomon.androidinternassignment.service.CoinApi
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.poomon.androidinternassignment.model.Coin
+import com.poomon.androidinternassignment.model.CoinDataFactory
 import kotlinx.coroutines.*
 
 class CoinViewModel: ViewModel() {
 
-    // Coroutines
-    private var viewModelJob = Job()
-    // Dispatchers.Main = uiScope; Use uiScope because after ended, ui got updated (RecyclerView)
-    private val coroutineScope = CoroutineScope(
-        viewModelJob + Dispatchers.Main
-    )
-
     // LiveData
-    private val _response = MutableLiveData<MutableList<Coin>>()
-    val data: LiveData<MutableList<Coin>>
-        get() = _response
+    lateinit var response: LiveData<PagedList<Coin>>
+
+    // PagedList
+    private var pagedListConfig = PagedList.Config.Builder().setEnablePlaceholders(false)
+        .setPrefetchDistance(10)
+        .setInitialLoadSizeHint(5)
+        .setPageSize(5)
+        .build()
+    private val sourceFactory = CoinDataFactory()
 
     init {
-        fetchCoins()
+        initial()
     }
 
-    fun fetchCoins(){
-        coroutineScope.launch {
-            var api = CoinApi.retrofitService
-            try {
-                _response.value = withContext(Dispatchers.IO){
-                    api.getWithLimit(30).data.coins
-                }
-            } catch (e: Exception){
-                //TODO
-            }
-        }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+    private fun initial(){
+        response = LivePagedListBuilder(sourceFactory, pagedListConfig).build()
     }
 }

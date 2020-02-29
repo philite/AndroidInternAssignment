@@ -1,4 +1,4 @@
-package com.poomon.androidinternassignment.data
+package com.poomon.androidinternassignment.model
 
 data class CoinCollection(
     val status: String,
