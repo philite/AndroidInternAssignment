@@ -7,9 +7,9 @@ import kotlinx.coroutines.*
 
 class CoinDataSource: PositionalDataSource<Coin>() {
 
-    private var viewModelJob = Job()
+    private var apiJob = Job()
     private val coroutineScope = CoroutineScope(
-        viewModelJob + Dispatchers.IO)
+        apiJob + Dispatchers.IO)
 
     private var data = mutableListOf<Coin>()
 
