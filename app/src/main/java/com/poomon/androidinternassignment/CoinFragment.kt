@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.poomon.androidinternassignment.adapter.CoinAdapter
-import com.poomon.androidinternassignment.data.Coin
+import com.poomon.androidinternassignment.model.Coin
 import com.poomon.androidinternassignment.databinding.FragmentCoinBinding
 import com.poomon.androidinternassignment.viewmodel.CoinViewModel
 
@@ -40,7 +41,7 @@ class CoinFragment: Fragment() {
 
         viewModel = factory.create(CoinViewModel::class.java)
         initView()
-        subscribeUi(viewModel.data)
+        subscribeUi(viewModel.response)
 
         return binding.root
     }
@@ -55,13 +56,12 @@ class CoinFragment: Fragment() {
             adapter = coinAdapter
         }
 
-        binding.refresh.setOnClickListener {
-            viewModel.fetchCoins()
-        }
+//        binding.refresh.setOnClickListener {
+//            viewModel.fetchCoins()
+//        }
     }
 
-    private fun subscribeUi(liveData: LiveData<MutableList<Coin>>){
-        // ToDo: DiffUtil
+    private fun subscribeUi(liveData: LiveData<PagedList<Coin>>){
         liveData.observe(viewLifecycleOwner, Observer {newData->
             if (newData != null){
                 coinAdapter.submitList(newData)

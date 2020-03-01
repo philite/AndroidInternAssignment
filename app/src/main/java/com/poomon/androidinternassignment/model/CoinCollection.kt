@@ -1,4 +1,4 @@
-package com.poomon.androidinternassignment.data
+package com.poomon.androidinternassignment.model
 
 data class CoinCollection(
     val status: String,
@@ -6,7 +6,7 @@ data class CoinCollection(
 )
 
 data class Data(
-    val coins: List<Coin>
+    val coins: MutableList<Coin>
 )
 
 data class Coin(
