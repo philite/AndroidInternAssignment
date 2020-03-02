@@ -3,15 +3,17 @@ package com.poomon.androidinternassignment.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener
+import com.poomon.androidinternassignment.R
 import com.poomon.androidinternassignment.model.Coin
 import com.poomon.androidinternassignment.databinding.ItemCoinBinding
 
-class CoinAdapter : PagedListAdapter<Coin, CoinAdapter.ViewHolder>(CoinAdapterDiffCallback()) {
-
-//    var data = mutableListOf<Coin>()
+class CoinPagedListAdapter : PagedListAdapter<Coin, CoinPagedListAdapter.ViewHolder>(CoinAdapterDiffCallback()) {
 
     class ViewHolder(val binding: ItemCoinBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -24,6 +26,28 @@ class CoinAdapter : PagedListAdapter<Coin, CoinAdapter.ViewHolder>(CoinAdapterDi
         val item = getItem(position)
         holder.binding.nameText.text = item?.name
         holder.binding.descriptionText.text = item?.description
+
+        // Check if not null -> Load icon
+        item?.iconUrl.let {
+            // Required kotlinOptions { jvmTarget = "1.8" }
+            val iconUri = item?.iconUrl
+                ?.toUri()?.buildUpon()?.scheme("https")?.build()
+
+            GlideToVectorYou
+                .init()
+                .with(holder.binding.coinImage.context)
+                .withListener(object: GlideToVectorYouListener {
+                    override fun onLoadFailed() {
+                        Log.d("ImageData", "ImageFailed: " + item!!.name)
+                    }
+
+                    override fun onResourceReady() {
+                        Log.d("ImageData", "ImageLoaded: " + item!!.name)
+                    }
+                })
+                .setPlaceHolder(R.drawable.loading_animation, R.drawable.ic_broken_image)
+                .load(iconUri, holder.binding.coinImage)
+        }
 
         // Logging
         Log.d("LiveData ViewHolder", "Item at " + position.toString() + " Name = " + getItem(position)?.name)

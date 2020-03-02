@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+// Data provided by Coinranking
 private const val BASE_URL = "https://api.coinranking.com"
 
 private val retrofit = Retrofit.Builder()

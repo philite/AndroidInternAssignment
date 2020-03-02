@@ -1,27 +1,28 @@
 package com.poomon.androidinternassignment.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.poomon.androidinternassignment.model.Coin
-import com.poomon.androidinternassignment.model.CoinDataFactory
-import kotlinx.coroutines.*
+import com.poomon.androidinternassignment.model.CoinDataSourceFactory
+import com.poomon.androidinternassignment.model.CoinPositionalDataSource
 
 class CoinViewModel: ViewModel() {
-
-    // LiveData
-    lateinit var response: LiveData<PagedList<Coin>>
 
     // PagedList
     private var pagedListConfig = PagedList.Config.Builder().setEnablePlaceholders(false)
         .setPrefetchDistance(10)
-        .setInitialLoadSizeHint(5)
-        .setPageSize(5)
+        .setInitialLoadSizeHint(10)
+        .setPageSize(10)
         .build()
-    private val sourceFactory = CoinDataFactory()
+    private val sourceFactory = CoinDataSourceFactory()
+
+    // LiveData
+    lateinit var response: LiveData<PagedList<Coin>>
+    lateinit var liveDataSource: LiveData<CoinPositionalDataSource>
+    lateinit var networkState: LiveData<String>
 
     init {
         initial()
@@ -29,5 +30,8 @@ class CoinViewModel: ViewModel() {
 
     private fun initial(){
         response = LivePagedListBuilder(sourceFactory, pagedListConfig).build()
+        liveDataSource = sourceFactory.mutableLiveData
+        // Every time liveDataSource value changed --> networkState = DataSource.networkState
+        networkState = Transformations.switchMap(liveDataSource, CoinPositionalDataSource::networkState)
     }
 }

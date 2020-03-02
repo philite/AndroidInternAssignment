@@ -1,5 +1,7 @@
 package com.poomon.androidinternassignment.model
 
+import android.widget.ImageView
+
 data class CoinCollection(
     val status: String,
     val data: Data
@@ -12,5 +14,6 @@ data class Data(
 data class Coin(
     val name: String,
     val description: String,
-    val iconUrl: String
+    val iconUrl: String,
+    val iconImg: ImageView
 )
