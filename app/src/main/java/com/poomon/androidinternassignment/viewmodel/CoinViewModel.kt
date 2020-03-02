@@ -18,8 +18,8 @@ class CoinViewModel: ViewModel() {
     // PagedList
     private var pagedListConfig = PagedList.Config.Builder().setEnablePlaceholders(false)
         .setPrefetchDistance(10)
-        .setInitialLoadSizeHint(5)
-        .setPageSize(5)
+        .setInitialLoadSizeHint(10)
+        .setPageSize(10)
         .build()
     private val sourceFactory = CoinDataFactory()
 

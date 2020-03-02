@@ -39,7 +39,7 @@ class CoinPagedListAdapter : PagedListAdapter<Coin, CoinPagedListAdapter.ViewHol
                     Log.d("ImageData", "ImageLoaded: " + item!!.name)
                 }
             })
-            .setPlaceHolder(R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground)
+            .setPlaceHolder(R.drawable.loading_animation, R.drawable.ic_broken_image)
             // TODO: Uri parse error exception
             .load(Uri.parse(item?.iconUrl), holder.binding.coinImage)
 
