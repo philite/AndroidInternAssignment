@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.poomon.androidinternassignment.adapter.CoinAdapter
+import com.poomon.androidinternassignment.adapter.CoinPagedListAdapter
 import com.poomon.androidinternassignment.model.Coin
 import com.poomon.androidinternassignment.databinding.FragmentCoinBinding
 import com.poomon.androidinternassignment.viewmodel.CoinViewModel
@@ -30,7 +30,7 @@ class CoinFragment: Fragment() {
 
     // Recycler
     private lateinit var layout: LinearLayoutManager
-    private lateinit var coinAdapter: CoinAdapter
+    private lateinit var coinAdapter: CoinPagedListAdapter
     private lateinit var dividerItemDecoration: DividerItemDecoration
 
     override fun onCreateView(
@@ -50,7 +50,7 @@ class CoinFragment: Fragment() {
 
     private fun initView(){
         layout = LinearLayoutManager(context)
-        coinAdapter = CoinAdapter()
+        coinAdapter = CoinPagedListAdapter()
         dividerItemDecoration = DividerItemDecoration(context, layout.orientation)
 
         binding.coinRecycler.apply{
