@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -19,6 +20,8 @@ import com.poomon.androidinternassignment.databinding.FragmentCoinBinding
 import com.poomon.androidinternassignment.viewmodel.CoinViewModel
 
 class CoinFragment: Fragment() {
+
+    // If no liveData, onResume --> Retry
 
     // View Binding
     private var _binding: FragmentCoinBinding? = null
@@ -42,7 +45,7 @@ class CoinFragment: Fragment() {
 
         viewModel = factory.create(CoinViewModel::class.java)
         initView()
-        subscribeUi(viewModel.response)
+        subscribeUi(viewModel.response, viewModel.networkState)
 
         return binding.root
     }
@@ -60,7 +63,7 @@ class CoinFragment: Fragment() {
         }
     }
 
-    private fun subscribeUi(liveData: LiveData<PagedList<Coin>>){
+    private fun subscribeUi(liveData: LiveData<PagedList<Coin>>, networkState: LiveData<String>){
         liveData.observe(viewLifecycleOwner, Observer {newData->
             if (newData != null){
                 coinAdapter.submitList(newData)
@@ -68,6 +71,13 @@ class CoinFragment: Fragment() {
                 Log.d("LiveData Fragment", "LiveData updated")
             }
         })
+        networkState.observe(viewLifecycleOwner, Observer { newState ->
+            showToast(newState)
+        })
+    }
+
+    private fun showToast(message: String){
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {
