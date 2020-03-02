@@ -11,8 +11,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.poomon.androidinternassignment.adapter.CoinAdapter
 import com.poomon.androidinternassignment.model.Coin
 import com.poomon.androidinternassignment.databinding.FragmentCoinBinding
@@ -29,8 +29,9 @@ class CoinFragment: Fragment() {
     private lateinit var viewModel: CoinViewModel
 
     // Recycler
-    private lateinit var layout: RecyclerView.LayoutManager
+    private lateinit var layout: LinearLayoutManager
     private lateinit var coinAdapter: CoinAdapter
+    private lateinit var dividerItemDecoration: DividerItemDecoration
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,15 +51,13 @@ class CoinFragment: Fragment() {
     private fun initView(){
         layout = LinearLayoutManager(context)
         coinAdapter = CoinAdapter()
+        dividerItemDecoration = DividerItemDecoration(context, layout.orientation)
 
         binding.coinRecycler.apply{
             layoutManager = layout
             adapter = coinAdapter
+            addItemDecoration(dividerItemDecoration)
         }
-
-//        binding.refresh.setOnClickListener {
-//            viewModel.fetchCoins()
-//        }
     }
 
     private fun subscribeUi(liveData: LiveData<PagedList<Coin>>){
