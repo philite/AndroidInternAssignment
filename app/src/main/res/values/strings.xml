@@ -4,10 +4,10 @@
     <string name="main_text">Coins</string>
 
     <string name="coin_placeholder">Bitcoin</string>
-    <string name="desc_placeholder">Lorem ipsum dolor sit amet, per no facilisi conceptam adversarium.
-        Ipsum semper comprehensam usu no. No agam scribentur omittantur vim, no has nibh mucius invidunt,
-        ad pri sint interpretaris. Est in magna utroque, novum deleniti constituam mel at. Est repudiare tincidunt no,
-        dicat ponderum erroribus cu pro.</string>
+    <string name="desc_placeholder">Do not go gentle into that good night, Old age should burn and rave at close of day;
+        Rage, rage against the dying of the light.
+        Though wise men at their end know dark is right, Because their words had forked no lightning they
+        Do not go gentle into that good night.</string>
 
     <string name="icon_description">Cryptocurrecny icon</string>
 </resources>

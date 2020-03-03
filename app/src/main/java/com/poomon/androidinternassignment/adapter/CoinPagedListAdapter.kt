@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener
 import com.poomon.androidinternassignment.R
-import com.poomon.androidinternassignment.model.Coin
+import com.poomon.androidinternassignment.data.Coin
 import com.poomon.androidinternassignment.databinding.ItemCoinBinding
 
 class CoinPagedListAdapter : PagedListAdapter<Coin, CoinPagedListAdapter.ViewHolder>(CoinAdapterDiffCallback()) {

@@ -1,4 +1,4 @@
-package com.poomon.androidinternassignment
+package com.poomon.androidinternassignment.ui
 
 import android.app.Application
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -14,8 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.poomon.androidinternassignment.R
 import com.poomon.androidinternassignment.adapter.CoinPagedListAdapter
-import com.poomon.androidinternassignment.model.Coin
+import com.poomon.androidinternassignment.data.Coin
 import com.poomon.androidinternassignment.databinding.FragmentCoinBinding
 import com.poomon.androidinternassignment.viewmodel.CoinViewModel
 
@@ -50,9 +52,12 @@ class CoinFragment: Fragment() {
 
 
     private fun initView(){
+        val divider = ContextCompat.getDrawable(requireContext(), R.drawable.divider_custom)
+
         layout = LinearLayoutManager(context)
         coinAdapter = CoinPagedListAdapter()
         dividerItemDecoration = DividerItemDecoration(context, layout.orientation)
+        dividerItemDecoration.setDrawable(divider!!)
 
         binding.coinRecycler.apply{
             layoutManager = layout

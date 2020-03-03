@@ -2,6 +2,7 @@ package com.poomon.androidinternassignment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.poomon.androidinternassignment.ui.CoinFragment
 
 class MainActivity : AppCompatActivity() {
 

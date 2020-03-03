@@ -5,9 +5,9 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.poomon.androidinternassignment.model.Coin
-import com.poomon.androidinternassignment.model.CoinDataSourceFactory
-import com.poomon.androidinternassignment.model.CoinPositionalDataSource
+import com.poomon.androidinternassignment.data.Coin
+import com.poomon.androidinternassignment.data.CoinDataSourceFactory
+import com.poomon.androidinternassignment.data.CoinPositionalDataSource
 
 class CoinViewModel: ViewModel() {
 

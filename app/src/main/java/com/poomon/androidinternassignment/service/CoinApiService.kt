@@ -1,7 +1,7 @@
 package com.poomon.androidinternassignment.service
 
 import androidx.annotation.IntRange
-import com.poomon.androidinternassignment.model.CoinCollection
+import com.poomon.androidinternassignment.data.CoinCollection
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

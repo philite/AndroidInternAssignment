@@ -1,4 +1,4 @@
-package com.poomon.androidinternassignment.model
+package com.poomon.androidinternassignment.data
 
 import android.util.Log
 import androidx.lifecycle.LiveData
