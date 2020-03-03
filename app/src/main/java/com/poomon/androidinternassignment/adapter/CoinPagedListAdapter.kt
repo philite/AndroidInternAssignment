@@ -13,6 +13,8 @@ import com.poomon.androidinternassignment.R
 import com.poomon.androidinternassignment.data.Coin
 import com.poomon.androidinternassignment.databinding.ItemCoinBinding
 
+private const val nullDescription = "No description provided."
+
 class CoinPagedListAdapter : PagedListAdapter<Coin, CoinPagedListAdapter.ViewHolder>(CoinAdapterDiffCallback()) {
 
     class ViewHolder(val binding: ItemCoinBinding): RecyclerView.ViewHolder(binding.root)
@@ -25,7 +27,13 @@ class CoinPagedListAdapter : PagedListAdapter<Coin, CoinPagedListAdapter.ViewHol
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.binding.nameText.text = item?.name
-        holder.binding.descriptionText.text = item?.description
+
+        if (item?.description == null){
+            holder.binding.descriptionText.text = nullDescription
+        }
+        else {
+            holder.binding.descriptionText.text = item.description
+        }
 
         // Check if not null -> Load icon
         item?.iconUrl.let {
