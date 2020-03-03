@@ -18,6 +18,9 @@ class CoinPositionalDataSource: PositionalDataSource<Coin>() {
     // ApiService
     private val api = CoinApi.retrofitService
 
+    // Error message
+    private val errorMessage = "Loading failed, please check your internet connection"
+
     // Initial
     override fun loadInitial(
         params: LoadInitialParams,
@@ -38,7 +41,7 @@ class CoinPositionalDataSource: PositionalDataSource<Coin>() {
 //                        + params.requestedLoadSize.toString())
             } catch (e: Exception){
                 Log.d("LiveData", "loadInitialFailed: $e")
-                _networkState.postValue("Load Failed")
+                _networkState.postValue(errorMessage)
             }
         }
     }
@@ -64,7 +67,7 @@ class CoinPositionalDataSource: PositionalDataSource<Coin>() {
 
             } catch (e: Exception){
                 Log.d("LiveData", "loadRangeFailed: $e")
-                _networkState.postValue("Load Failed")
+                _networkState.postValue(errorMessage)
             }
         }
     }

@@ -7,7 +7,7 @@ class MainActivity : AppCompatActivity() {
 
     private val manager = supportFragmentManager
 
-    // Extendable fragment
+    // Extendable fragment list for navigation
     private val pages = listOf(
         CoinFragment()
     )

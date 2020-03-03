@@ -21,8 +21,6 @@ import com.poomon.androidinternassignment.viewmodel.CoinViewModel
 
 class CoinFragment: Fragment() {
 
-    // If no liveData, onResume --> Retry
-
     // View Binding
     private var _binding: FragmentCoinBinding? = null
     private val binding get() = _binding!! // Backing property
